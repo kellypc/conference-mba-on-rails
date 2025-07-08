@@ -1,4 +1,23 @@
-<div>
-  <h1 class="font-bold text-4xl">Talks#show</h1>
-  <p>Find me in app/views/talks/show.html.erb</p>
+<h1 class="text-3xl font-bold mb-4"><%= @talk.title %></h1>
+<p class="mb-4"><strong>Descrição:</strong> <%= @talk.description %></p>
+<p class="mb-4"><strong>Palestrante:</strong> <%= link_to @talk.speaker.name, @talk.speaker, class: "text-blue-600 hover:underline" %></p>
+<h2 class="text-2xl font-bold mb-2">Participantes</h2>
+<% if @talk.participants.any? %>
+  <ul class="list-disc pl-5">
+    <% @talk.participants.each do |participant| %>
+      <li><%= link_to participant.name, participant, class: "text-blue-600 hover:underline" %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhum participante inscrito.</p>
+<% end %>
+<%= form_with model: Registration.new, url: registrations_path, class: "mt-4" do |form| %>
+  <%= form.hidden_field :talk_id, value: @talk.id %>
+  <%= form.collection_select :participant_id, Participant.all, :id, :name, prompt: "Selecione um participante" %>
+  <%= form.submit "Inscrever", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+<% end %>
+<div class="mt-4">
+  <%= link_to "Editar", edit_talk_path(@talk), class: "text-blue-600 hover:underline" %>
+  <%= link_to "Excluir", @talk, method: :delete, data: { confirm: "Tem certeza?" }, class: "text-red-600 hover:underline" %>
+  <%= link_to "Voltar", talks_path, class: "text-blue-600 hover:underline" %>
 </div>

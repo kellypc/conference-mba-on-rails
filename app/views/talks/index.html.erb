@@ -1,4 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl">Talks#index</h1>
-  <p>Find me in app/views/talks/index.html.erb</p>
-</div>
+<h1 class="text-3xl font-bold mb-4">Palestras</h1>
+<%= link_to "Nova Palestra", new_talk_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4 inline-block" %>
+<table class="w-full border-collapse">
+  <thead>
+    <tr class="bg-gray-200">
+      <th class="border p-2">Título</th>
+      <th class="border p-2">Palestrante</th>
+      <th class="border p-2">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @talks.each do |talk| %>
+      <tr class="hover:bg-gray-100">
+        <td class="border p-2"><%= talk.title %></td>
+        <td class="border p-2"><%= talk.speaker.name %></td>
+        <td class="border p-2">
+          <%= link_to "Ver", talk, class: "text-blue-600 hover:underline" %>
+          <%= link_to "Editar", edit_talk_path(talk), class: "text-blue-600 hover:underline" %>
+          <%= link_to "Excluir", talk, method: :delete, data: { confirm: "Tem certeza?" }, class: "text-red-600 hover:underline" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

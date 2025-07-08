@@ -1,4 +1,17 @@
-<div>
-  <h1 class="font-bold text-4xl">Talks#new</h1>
-  <p>Find me in app/views/talks/new.html.erb</p>
-</div>
+<h1 class="text-3xl font-bold mb-4">Nova Palestra</h1>
+<%= form_with model: @talk, class: "space-y-4" do |form| %>
+  <div>
+    <%= form.label :title, "Título", class: "block font-bold" %>
+    <%= form.text_field :title, class: "w-full border rounded p-2" %>
+  </div>
+  <div>
+    <%= form.label :description, "Descrição", class: "block font-bold" %>
+    <%= form.text_area :description, class: "w-full border rounded p-2" %>
+  </div>
+  <div>
+    <%= form.label :speaker_id, "Palestrante", class: "block font-bold" %>
+    <%= form.collection_select :speaker_id, @speakers, :id, :name, prompt: "Selecione um palestrante", class: "w-full border rounded p-2" %>
+  </div>
+  <%= form.submit "Criar", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+<% end %>
+<%= link_to "Voltar", talks_path, class: "text-blue-600 hover:underline mt-4 inline-block" %>
