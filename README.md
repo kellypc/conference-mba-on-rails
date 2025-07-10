@@ -52,5 +52,5 @@ Criei um Callback para no model Participant para salvar o email em caixa baixa.
 
 Escolhi usar o Interactor para jogar a lógica de criar
 o participante para dentro do serviço o Interactor nos fornece um contexto onde fica mais simples manipular a entidade.
-----------------------------------------
+
 
