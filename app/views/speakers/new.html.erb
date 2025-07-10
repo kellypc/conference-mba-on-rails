@@ -1,4 +1,15 @@
 <div>
   <h1 class="font-bold text-4xl">Speakers#new</h1>
-  <p>Find me in app/views/speakers/new.html.erb</p>
+  <%= form_with model: @speaker, class: "space-y-4" do |form| %>
+  <div>
+    <%= form.label :name, "Nome", class: "block font-bold" %>
+    <%= form.text_field :name, class: "w-full border rounded p-2" %>
+  </div>
+  <div>
+    <%= form.label :bio, "Descrição", class: "block font-bold" %>
+    <%= form.text_area :bio, class: "w-full border rounded p-2" %>
+  </div>
+  <%= form.submit "Criar", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+<% end %>
+<%= link_to "Voltar", talks_path, class: "text-blue-600 hover:underline mt-4 inline-block" %>
 </div>

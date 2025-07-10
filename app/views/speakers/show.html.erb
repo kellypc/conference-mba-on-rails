@@ -1,4 +1,23 @@
 <div>
   <h1 class="font-bold text-4xl">Speakers#show</h1>
-  <p>Find me in app/views/speakers/show.html.erb</p>
+  <p><strong>Nome:</strong> <%= @speaker.name %></p>
+  <p><strong>Descrição:</strong> <%= @speaker.bio %></p>
+  <h2 class="text-2xl mt-4">Palestras</h2>
+  <% if @speaker.talks.any? %>
+    <ul class="list-disc pl-5">
+      <% @speaker.talks.each do |talk| %>
+        <li>
+          <%= link_to talk.title, talk, class: "text-blue-600 hover:underline" %>
+          <p class="text-gray-600"><%= talk.description %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Nenhuma palestra cadastrada.</p>
+  <% end %>
+  <div class="mt-4">
+    <%= link_to "Editar", edit_speaker_path(@speaker), class: "text-blue-600 hover:underline" %>
+    <%= link_to "Excluir", @speaker, method: :delete, data: { confirm: "Tem certeza?" }, class: "text-red-600 hover:underline" %>
+    <%= link_to "Voltar", speakers_path, class: "text-blue-600 hover:underline" %>
+  </div>
 </div>
