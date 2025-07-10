@@ -13,12 +13,13 @@ class ParticipantsController < ApplicationController
   end
 
   def create
-    @participant = Participant::Create.call(participant_params)
+    result = Participant::Create.call(params: participant_params)
 
-    if @participant.persisted?
-      redirect_to @participant, notice: "Participante criado com sucesso."
+    if result.success?
+      redirect_to result.participant, notice: "Participante criado com sucesso."
     else
-      @participant = Participant.new(participant_params) # Reinitialize to show errors
+      @participant = Participant.new(participant_params)
+      @participant.errors.add(:base, result.error)
       render :new, status: :unprocessable_entity
     end
   end
